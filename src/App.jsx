@@ -3,9 +3,11 @@ import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <main>
-      <Navbar />
-    </main> 
+    <nav>
+      <div>
+        <Navbar />
+      </div>
+    </nav>
   );
 }
 

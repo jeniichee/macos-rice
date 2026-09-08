@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { navIcons, navLinks } from "../constants";
+import { useDesktopContext } from "../contexts/DesktopContext.jsx";
+import { navIcons, navLinks } from "../constants/index.js";
 
 export const Navbar = () => {
+  const { openWindow, windows } = useDesktopContext();
 
   function updateTime() {
-    const date = new Date(); 
-    let hour = date.getHours(); 
+    const date = new Date();
+    let hour = date.getHours();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
 
@@ -14,7 +16,7 @@ export const Navbar = () => {
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     const time_string = `${hour}:${minutes}:${seconds}`;
-    document.getElementById("time").textContent = time_string; 
+    document.getElementById("time").textContent = time_string;
   }
 
   useEffect(() => {
@@ -32,10 +34,10 @@ export const Navbar = () => {
         <p className="font-bold">Jen's Portfolio</p>
 
         <ul>
-          {navLinks.map(({ id, name, type }) => (
-            //   <li key={id} onClick={() => openWindow(type)}>
-            <p>{name}</p>
-            /* </li> */
+          {navLinks.map(({ id, name }) => (
+            <li key={id} onClick={() => openWindow(id)}>
+              <p>{name}</p>
+            </li>
           ))}
         </ul>
       </div>

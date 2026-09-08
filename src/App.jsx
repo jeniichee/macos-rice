@@ -14,7 +14,7 @@ const App = () => {
   const manager = useWindowManager(windowConfigs);
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden">
+    <main>
       <DesktopProvider value={manager}>
         <Navbar />
         {Array.from(manager.windows.values()).map(

@@ -2,31 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
-
-/**
- * @typedef {Object} WindowProps
- * @property {import('../types').WindowConfig} config - { id, name, type }
- * @property {import('../types').WindowState} state - Current window state
- * @property {{ open: Function, close: Function, focus: Function }} actions
- * @property {number} [cascadeIndex] - Used to offset overlapping windows so they don't stack exactly on top of each other
- */
+import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
 
 
-const COLORS = {
-  windowBg: "rgba(30, 30, 32, 0.97)",
-  border: "rgba(255, 255, 255, 0.08)",
-  titleBarBg: "rgba(40, 40, 44, 0.97)",
-  titleBarBgInactive: "rgba(28, 28, 30, 0.97)",
-  textPrimary: "rgba(255, 255, 255, 0.92)",
-  textSecondary: "rgba(255, 255, 255, 0.55)",
-  hoverBg: "rgba(255, 255, 255, 0.08)",
-};
-
-const WINDOW_WIDTH = 480;
-const WINDOW_HEIGHT = 360;
-const MIN_WIDTH = 280;
-const MIN_HEIGHT = 200;
-const CASCADE_OFFSET = 30;
 
 /**
  * A simple modal-style window: title bar with a name and close button,
@@ -39,21 +17,27 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
   const isActive = isOpen && state.isActive;
   const zIndex = isOpen ? state.zIndex : 0;
-  const offset = cascadeIndex * CASCADE_OFFSET;
+  const offset = cascadeIndex * WINDOW_CONFIG.CASCADE_OFFSET;
 
   const [position, setPosition] = useState(() => {
     if (typeof window === "undefined") {
       return { x: 100 + offset, y: 80 + offset };
     }
     return {
-      x: Math.max(20, (window.innerWidth - WINDOW_WIDTH) / 2 + offset),
-      y: Math.max(20, (window.innerHeight - WINDOW_HEIGHT) / 2 - 40 + offset),
+      x: Math.max(
+        20,
+        (window.innerWidth - WINDOW_CONFIG.WINDOW_WIDTH) / 2 + offset,
+      ),
+      y: Math.max(
+        20,
+        (window.innerHeight - WINDOW_CONFIG.WINDOW_HEIGHT) / 2 - 40 + offset,
+      ),
     };
   });
 
   const [size, setSize] = useState({
-    width: WINDOW_WIDTH,
-    height: WINDOW_HEIGHT,
+    width: WINDOW_CONFIG.WINDOW_WIDTH,
+    height: WINDOW_CONFIG.WINDOW_HEIGHT,
   });
 
   const dragRef = useRef({
@@ -142,17 +126,17 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
       let nextY = r.startPosY;
 
       if (dir.includes("right")) {
-        nextWidth = Math.max(MIN_WIDTH, r.startWidth + dx);
+        nextWidth = Math.max(WINDOW_CONFIG.MIN_WIDTH, r.startWidth + dx);
       }
       if (dir.includes("left")) {
-        nextWidth = Math.max(MIN_WIDTH, r.startWidth - dx);
+        nextWidth = Math.max(WINDOW_CONFIG.MIN_WIDTH, r.startWidth - dx);
         nextX = r.startPosX + (r.startWidth - nextWidth);
       }
       if (dir.includes("bottom")) {
-        nextHeight = Math.max(MIN_HEIGHT, r.startHeight + dy);
+        nextHeight = Math.max(WINDOW_CONFIG.MIN_HEIGHT, r.startHeight + dy);
       }
       if (dir.includes("top")) {
-        nextHeight = Math.max(MIN_HEIGHT, r.startHeight - dy);
+        nextHeight = Math.max(WINDOW_CONFIG.MIN_HEIGHT, r.startHeight - dy);
         nextY = r.startPosY + (r.startHeight - nextHeight);
       }
 
@@ -278,10 +262,7 @@ const CONTENT_MAP = {
   resume: ResumeContent,
 };
 
-/**
- * Renders public/resume.pdf inline with a download link.
- * If your resume is an image instead, swap the <iframe> for an <img src="/resume.png" />.
- */
+
 function ResumeContent() {
   return (
     <div className="flex flex-col h-full">
@@ -307,10 +288,6 @@ function ResumeContent() {
   );
 }
 
-/**
- * Simple picture grid. Point each `image` at a file in your public/images folder,
- * or swap this array out for however you're storing your project data.
- */
 const PROJECTS = [
   { name: "Project One", image: "/images/project1.png" },
   { name: "Project Two", image: "/images/project2.png" },

@@ -10,3 +10,21 @@ export const navIcons = [
   { id: 2, img: "/icons/search.svg" },
   { id: 4, img: "/icons/mode.svg" },
 ];
+
+export const COLORS = {
+  windowBg: "rgba(30, 30, 32, 0.97)",
+  border: "rgba(255, 255, 255, 0.08)",
+  titleBarBg: "rgba(40, 40, 44, 0.97)",
+  titleBarBgInactive: "rgba(28, 28, 30, 0.97)",
+  textPrimary: "rgba(255, 255, 255, 0.92)",
+  textSecondary: "rgba(255, 255, 255, 0.55)",
+  hoverBg: "rgba(255, 255, 255, 0.08)",
+};
+
+export const WINDOW_CONFIG = {
+  WINDOW_WIDTH: 480,
+  WINDOW_HEIGHT: 360,
+  MIN_WIDTH: 280,
+  MIN_HEIGHT: 200,
+  CASCADE_OFFSET: 30,
+};

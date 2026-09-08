@@ -99,27 +99,8 @@ body {
     }
   }
 
-  #window-controls {
-    @apply flex gap-2;
 
-    .close {
-      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
-    }
-
-    .minimize {
-      @apply size-3.5 rounded-full bg-[#ffc030];
-    }
-
-    .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
-    }
-  }
-
-  #window-header {
-    @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
-  }
-
-  #safari {
+  /* #safari {
     @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     .search {
@@ -161,7 +142,7 @@ body {
         }
       }
     }
-  }
+  } */
 
   #terminal {
     @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;

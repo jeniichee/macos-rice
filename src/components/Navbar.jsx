@@ -39,6 +39,14 @@ export const Navbar = () => {
               <p>{name}</p>
             </li>
           ))}
+          <a
+            className="text-sm cursor-pointer hover:underline transition-all"
+            href="/files/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume
+          </a>
         </ul>
       </div>
 

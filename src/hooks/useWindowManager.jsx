@@ -1,50 +1,10 @@
-/**
- * ============================================================================
- * USE WINDOW MANAGER HOOK
- * ============================================================================
- *
- * Core state management hook for the window system.
- * Manages open/closed state, z-index ordering, and window actions.
- *
- * @packageDocumentation
- */
-
 "use client";
 
 import { useState, useCallback, useMemo, useRef } from "react";
 import { createClosedState, createOpenState, isWindowOpen } from "../types/types";
 
-/**
- * @typedef {import('../types').WindowConfig} WindowConfig
- */
-
-/**
- * Hook that manages window state for a set of windows.
- *
- * @example
- * ```jsx
- * const windowConfigs = [
- *   { id: 1, name: 'Projects', type: 'finder' },
- * ];
- *
- * function App() {
- *   const manager = useWindowManager(windowConfigs);
- *
- *   return (
- *     <>
- *       <button onClick={() => manager.openWindow(1)}>Open Projects</button>
- *       {Array.from(manager.windows.values()).map(w => (
- *         <Window key={w.config.id} {...w} />
- *       ))}
- *     </>
- *   );
- * }
- * ```
- *
- * @param {WindowConfig[]} windowConfigs
- */
 export function useWindowManager(windowConfigs) {
-  // Track the next z-index to assign (using ref to avoid stale closures)
+
   const nextZIndexRef = useRef(1);
 
   const [windowStates, setWindowStates] = useState(() => {
@@ -55,9 +15,6 @@ export function useWindowManager(windowConfigs) {
     return initial;
   });
 
-  /**
-   * Open a window by ID. If already open, just focuses it.
-   */
   const openWindow = useCallback((id) => {
     setWindowStates((prev) => {
       const current = prev.get(id);
@@ -69,7 +26,6 @@ export function useWindowManager(windowConfigs) {
 
       const next = new Map(prev);
 
-      // Deactivate all other windows
       for (const [windowId, state] of next) {
         if (isWindowOpen(state) && state.isActive) {
           next.set(windowId, { ...state, isActive: false });
@@ -82,9 +38,6 @@ export function useWindowManager(windowConfigs) {
     });
   }, []);
 
-  /**
-   * Close a window by ID.
-   */
   const closeWindow = useCallback((id) => {
     setWindowStates((prev) => {
       if (!prev.get(id)) {
@@ -97,9 +50,6 @@ export function useWindowManager(windowConfigs) {
     });
   }, []);
 
-  /**
-   * Bring a window to the front / mark it active.
-   */
   const focusWindow = useCallback((id) => {
     setWindowStates((prev) => {
       const current = prev.get(id);

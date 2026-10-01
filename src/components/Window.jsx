@@ -4,15 +4,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
 import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
 
-
-
-/**
- * A simple modal-style window: title bar with a name and close button,
- * a content area, drag-to-move, and drag-to-resize from any edge/corner.
- * No maximize, no iframe mode.
- *
- * @param {WindowProps} props
- */
 export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
   const isActive = isOpen && state.isActive;
@@ -80,7 +71,6 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
     };
   }, []);
 
-  // ---- Resize (drag any edge/corner) ----
   const resizeRef = useRef({
     resizing: false,
     direction: null,
@@ -172,7 +162,6 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
       }}
       onMouseDownCapture={actions.focus}
     >
-      {/* Title Bar */}
       <div
         className="flex items-center gap-2 px-3 h-10 shrink-0 cursor-move select-none"
         style={{
@@ -195,8 +184,6 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
           {config.name}
         </span>
       </div>
-
-      {/* Content */}
       <div
         className="flex-1 overflow-auto"
         style={{ color: COLORS.textPrimary }}
@@ -204,7 +191,6 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
         <WindowContent type={config.type} />
       </div>
 
-      {/* Resize Handles */}
       <div
         className="absolute top-0 left-0 w-3 h-3 cursor-nwse-resize"
         onMouseDown={(e) => handleResizeMouseDown(e, "top-left")}
@@ -241,9 +227,6 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
   );
 }
 
-/**
- * Renders content based on config.type. Add your real components here.
- */
 function WindowContent({ type }) {
   const Content = CONTENT_MAP[type];
   if (!Content) {
@@ -259,34 +242,14 @@ function WindowContent({ type }) {
 const CONTENT_MAP = {
   finder: ProjectsContent,
   contact: () => <div className="p-4">Contact form goes here.</div>,
-  resume: ResumeContent,
+  // resume: () => (
+  //   <a
+  //     href="files/Resume.pdf"
+  //     target="_blank"
+  //     rel="noopener noreferrer"
+  //   >click me</a>
+  // ),
 };
-
-
-function ResumeContent() {
-  return (
-    <div className="flex flex-col h-full">
-      <div
-        className="flex justify-end p-2 border-b shrink-0"
-        style={{ borderColor: COLORS.border }}
-      >
-        <a
-          href="/resume.pdf"
-          download
-          className="text-sm px-3 py-1 rounded-md transition-colors"
-          style={{ backgroundColor: COLORS.hoverBg, color: COLORS.textPrimary }}
-        >
-          Download
-        </a>
-      </div>
-      <iframe
-        src="/resume.pdf"
-        title="Resume"
-        className="flex-1 w-full border-0"
-      />
-    </div>
-  );
-}
 
 const PROJECTS = [
   { name: "Project One", image: "/images/project1.png" },
@@ -311,4 +274,3 @@ function ProjectsContent() {
     </div>
   );
 }
- 

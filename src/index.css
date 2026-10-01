@@ -35,6 +35,12 @@ body {
 @layer base {
   main {
     @apply w-dvw h-dvh overflow-hidden;
+    background: linear-gradient(
+            to bottom,
+            rgba(0,0,0, 1)   0%,
+            rgba(0,0,0, 0.15) 0%,
+            rgba(0,0,0, 0)   10%
+        );
   }
 
   nav {
@@ -64,7 +70,7 @@ body {
 
 @layer components {
   .icon {
-    @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
+    @apply p-1 rounded hover:cursor-default;
   }
 
   #welcome {

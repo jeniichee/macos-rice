@@ -2,13 +2,18 @@
 export const navLinks = [
   { id: 1, name: "Projects", type: "finder" },
   { id: 3, name: "Contact", type: "contact" },
-  { id: 4, name: "Resume", type: "resume" },
+  // { id: 4, name: "Resume", type: "resume" },
 ];
 
 export const navIcons = [
   { id: 1, img: "/icons/wifi.svg" },
   { id: 2, img: "/icons/search.svg" },
   { id: 4, img: "/icons/mode.svg" },
+];
+
+export const PROJECTS = [
+  { name: "Project One", image: "/images/project1.png" },
+  { name: "Project Two", image: "/images/project2.png" },
 ];
 
 export const COLORS = {
@@ -26,5 +31,5 @@ export const WINDOW_CONFIG = {
   WINDOW_HEIGHT: 360,
   MIN_WIDTH: 280,
   MIN_HEIGHT: 200,
-  CASCADE_OFFSET: 30,
+  CASCADE_OFFSET: -30,
 };

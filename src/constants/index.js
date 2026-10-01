@@ -11,9 +11,18 @@ export const navIcons = [
   { id: 4, img: "/icons/mode.svg" },
 ];
 
+// todo
+export const dockApps = [
+  { id: 5, name: "Finder", img: "/icons/finder.png" },
+  { id: 6, name: "Terminal", img: "/icons/terminal.png" },
+  // { id: 2, name:"VS Code", img:},
+  { id: 8, name: "Trash", img: "/icons/trash.png" },
+];
+
+// todo  
 export const PROJECTS = [
-  { name: "Project One", image: "/images/project1.png" },
-  { name: "Project Two", image: "/images/project2.png" },
+  { name: "Project One", image: "" },
+  { name: "Project Two", image: "" },
 ];
 
 export const COLORS = {

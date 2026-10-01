@@ -1,8 +1,9 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 import { Window } from "./components/Window";
 import { DesktopProvider } from "./contexts/DesktopContext";
 import { useWindowManager } from "./hooks/useWindowManager";
+import Dock from "./components/Dock";
 
 const windowConfigs = [
   { id: 1, name: "Projects", type: "finder" },
@@ -17,6 +18,7 @@ const App = () => {
     <main>
       <DesktopProvider value={manager}>
         <Navbar />
+        <Dock />
         {Array.from(manager.windows.values()).map(
           ({ config, state, actions }, index) => (
             <Window

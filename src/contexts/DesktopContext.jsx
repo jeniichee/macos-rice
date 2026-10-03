@@ -2,14 +2,6 @@
 
 import { createContext, useContext } from "react";
 
-/**
- * @typedef {Object} DesktopContextValue
- * @property {Map<string|number, {config: object, state: object, actions: object}>} windows
- * @property {(id: string|number) => void} openWindow
- * @property {(id: string|number) => void} closeWindow
- * @property {(id: string|number) => void} focusWindow
- */
-
 const DesktopContext = createContext(null);
 
 export function DesktopProvider({ children, value }) {

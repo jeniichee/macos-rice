@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
 import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
+import Finder from "../windows/Finder.jsx";
 
 export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
@@ -188,7 +189,7 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
         className="flex-1 overflow-auto"
         style={{ color: COLORS.textPrimary }}
       >
-        <WindowContent type={config.type} />
+        <WindowContent id={config.id} />
       </div>
 
       <div
@@ -227,12 +228,12 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
   );
 }
 
-function WindowContent({ type }) {
-  const Content = CONTENT_MAP[type];
+function WindowContent({ id }) {
+  const Content = CONTENT_MAP[id];
   if (!Content) {
     return (
       <div className="p-4 text-sm" style={{ color: COLORS.textSecondary }}>
-        No content registered for window type "{type}".
+        No content registered for window id {id}.
       </div>
     );
   }
@@ -240,37 +241,7 @@ function WindowContent({ type }) {
 }
 
 const CONTENT_MAP = {
-  finder: ProjectsContent,
-  contact: () => <div className="p-4">Contact form goes here.</div>,
-  // resume: () => (
-  //   <a
-  //     href="files/Resume.pdf"
-  //     target="_blank"
-  //     rel="noopener noreferrer"
-  //   >click me</a>
-  // ),
+  1: () => <div>Projects</div>,
+  3: () => <div className="p-4">Contact form goes here.</div>,
+  5: Finder
 };
-
-const PROJECTS = [
-  { name: "Project One", image: "/images/project1.png" },
-  { name: "Project Two", image: "/images/project2.png" },
-];
-
-function ProjectsContent() {
-  return (
-    <div className="grid grid-cols-2 gap-4 p-4">
-      {PROJECTS.map((project) => (
-        <div key={project.name} className="flex flex-col gap-2">
-          <img
-            src={project.image}
-            alt={project.name}
-            className="rounded-lg w-full aspect-video object-cover"
-          />
-          <span className="text-sm" style={{ color: COLORS.textPrimary }}>
-            {project.name}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}

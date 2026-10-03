@@ -1,6 +1,6 @@
 // navbar
 export const navLinks = [
-  { id: 1, name: "Projects", type: "finder" },
+  { id: 1, name: "Projects", type: "projects" },
   { id: 3, name: "Contact", type: "contact" },
   // { id: 4, name: "Resume", type: "resume" },
 ];
@@ -13,17 +13,13 @@ export const navIcons = [
 
 // todo
 export const dockApps = [
-  { id: 5, name: "Finder", img: "/icons/finder.png" },
-  { id: 6, name: "Terminal", img: "/icons/terminal.png" },
+  { id: 5, name: "Finder", img: "/icons/finder.png", open: true},
+  { id: 6, name: "Terminal", img: "/icons/terminal.png", open: false},
   // { id: 2, name:"VS Code", img:},
-  { id: 8, name: "Trash", img: "/icons/trash.png" },
+  { id: 8, name: "Trash", img: "/icons/trash.png", open: true},
 ];
 
-// todo  
-export const PROJECTS = [
-  { name: "Project One", image: "" },
-  { name: "Project Two", image: "" },
-];
+
 
 export const COLORS = {
   windowBg: "rgba(30, 30, 32, 0.97)",

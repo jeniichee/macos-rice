@@ -1,21 +1,29 @@
-import React from 'react'
-import { dockApps } from '../constants'
+import React from "react";
+import { dockApps } from "../constants";
+import { useDesktopContext } from "../contexts/DesktopContext";
 
 const Dock = () => {
-    return (
-      <section id="dock">
-        <div className="dock-container">
-          {dockApps.map(({ id, name, img }) => (
-            <div key={id} className="relative flex justify-center">
-                <img
-                  src={img}
-                  alt={name}
-                />
-            </div>
-          ))}
-        </div>
-      </section>
-    );
-}
+  const { openWindow } = useDesktopContext();
 
-export default Dock
+  const openApp = (app) => {
+    openWindow(app.id);
+  };
+
+  return (
+    <section id="dock">
+      <div className="dock-container">
+        {dockApps.map(({ id, name, img }) => (
+          <div key={id}>
+            <button onClick={() => openApp({ id })}>
+              <div className="dock-item">
+                <img src={img} alt={name} className="dock-icon" />
+              </div>
+            </button>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Dock;

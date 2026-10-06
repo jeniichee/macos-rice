@@ -34,8 +34,13 @@ export const Navbar = () => {
         <p className="font-bold">Jen's Portfolio</p>
 
         <ul>
-          {navLinks.map(({ id, name }) => (
-            <li key={id} onClick={() => openWindow(id)}>
+          {navLinks.map(({ id, name, windowId, location }) => (
+            <li
+              key={id}
+              onClick={() =>
+                openWindow(windowId ?? id, location ? { location } : undefined)
+              }
+            >
               <p>{name}</p>
             </li>
           ))}

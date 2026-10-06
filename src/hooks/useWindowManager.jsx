@@ -15,28 +15,37 @@ export function useWindowManager(windowConfigs) {
     return initial;
   });
 
-  const openWindow = useCallback((id) => {
-    setWindowStates((prev) => {
-      const current = prev.get(id);
-      if (!current) {
-        console.warn(`useWindowManager: Window "${id}" not found`);
-        return prev;
+const openWindow = useCallback((id, data) => {
+  setWindowStates((prev) => {
+    const current = prev.get(id);
+    if (!current) {
+      console.warn(`useWindowManager: Window "${id}" not found`);
+      return prev;
+    }
+
+    const isOpen = isWindowOpen(current);
+    if (isOpen && current.isActive && data === undefined) return prev;
+
+    const next = new Map(prev);
+    for (const [windowId, state] of next) {
+      if (isWindowOpen(state) && state.isActive) {
+        next.set(windowId, { ...state, isActive: false });
       }
-      if (isWindowOpen(current)) return prev;
+    }
 
-      const next = new Map(prev);
-
-      for (const [windowId, state] of next) {
-        if (isWindowOpen(state) && state.isActive) {
-          next.set(windowId, { ...state, isActive: false });
-        }
-      }
-
-      const zIndex = nextZIndexRef.current++;
-      next.set(id, createOpenState(true, zIndex));
-      return next;
-    });
-  }, []);
+    const zIndex =
+      isOpen && current.isActive ? current.zIndex : nextZIndexRef.current++;
+    next.set(
+      id,
+      createOpenState(
+        true,
+        zIndex,
+        data ?? (isOpen ? current.data : undefined),
+      ),
+    );
+    return next;
+  });
+}, []);
 
   const closeWindow = useCallback((id) => {
     setWindowStates((prev) => {

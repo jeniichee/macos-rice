@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "./components/Navbar";
+import Navbar from "./components/navbar";
 import { Window } from "./components/Window";
 import { DesktopProvider } from "./contexts/DesktopContext";
 import { useWindowManager } from "./hooks/useWindowManager";

@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
 import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
 import Finder from "../windows/Finder.jsx";
-import { sidebar } from "../constants/index.js";
 
 export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
@@ -190,7 +189,7 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
         className="flex-1 overflow-auto"
         style={{ color: COLORS.textPrimary }}
       >
-        <WindowContent id={config.id} />
+        <WindowContent id={config.id} data={state.data} />;
       </div>
 
       <div
@@ -229,7 +228,7 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
   );
 }
 
-function WindowContent({ id }) {
+function WindowContent({ id, data }) {
   const Content = CONTENT_MAP[id];
   if (!Content) {
     return (
@@ -238,19 +237,10 @@ function WindowContent({ id }) {
       </div>
     );
   }
-  return <Content />;
+  return <Content {...data} />;
 }
 
-const goToLocation = (id) => {
-  const location = sidebar.find((location) => location.id === id);
-
-  if (location) {
-    setActiveLocation(location);
-  }
-};
-
 const CONTENT_MAP = {
-  1: () => goToLocation("work"),
   3: () => <div className="p-4">Contact form goes here.</div>,
   5: Finder,
 };

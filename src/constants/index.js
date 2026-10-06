@@ -1,8 +1,13 @@
 // navbar
 export const navLinks = [
-  { id: 1, name: "Projects", type: "projects" },
+  {
+    id: 1,
+    name: "Projects",
+    type: "projects",
+    windowId: 5,
+    location: "projects",
+  },
   { id: 3, name: "Contact", type: "contact" },
-  // { id: 4, name: "Resume", type: "resume" },
 ];
 
 export const navIcons = [
@@ -19,18 +24,6 @@ export const dockApps = [
   { id: 8, name: "Trash", img: "/icons/trash.png", open: true},
 ];
 
-export const wok = [
-  {
-    id: 101,
-    name: "Project One",
-    icon: "/icons/folder.png",
-  },
-  {
-    id: 102,
-    name: "Project Two",
-    icon: "/icons/folder.png",
-  },
-];
 
 export const abt = [
   {
@@ -42,25 +35,15 @@ export const abt = [
 
 export const trsh = [];
 
+export const projectItems = [
+  { id: 101, name: "Project One", icon: "/icons/folder.png" },
+  { id: 102, name: "Project Two", icon: "/icons/folder.png" },
+];
+
 export const sidebar = [
-  {
-    id: "work",
-    name: "Work",
-    type: "folder",
-    items: wok,
-  },
-  {
-    id: "about",
-    name: "About",
-    type: "folder",
-    items: abt,
-  },
-  {
-    id: "trash",
-    name: "Trash",
-    type: "folder",
-    items: trsh,
-  },
+  { id: "projects", name: "Projects", type: "folder", items: projectItems },
+  { id: "about", name: "About", type: "folder", items: abt },
+  { id: "trash", name: "Trash", type: "folder", items: trsh },
 ];
 
 

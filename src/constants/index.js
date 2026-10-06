@@ -19,6 +19,49 @@ export const dockApps = [
   { id: 8, name: "Trash", img: "/icons/trash.png", open: true},
 ];
 
+export const wok = [
+  {
+    id: 101,
+    name: "Project One",
+    icon: "/icons/folder.png",
+  },
+  {
+    id: 102,
+    name: "Project Two",
+    icon: "/icons/folder.png",
+  },
+];
+
+export const abt = [
+  {
+    id: 201,
+    name: "Resume",
+    icon: "/icons/file.png",
+  },
+];
+
+export const trsh = [];
+
+export const sidebar = [
+  {
+    id: "work",
+    name: "Work",
+    type: "folder",
+    items: wok,
+  },
+  {
+    id: "about",
+    name: "About",
+    type: "folder",
+    items: abt,
+  },
+  {
+    id: "trash",
+    name: "Trash",
+    type: "folder",
+    items: trsh,
+  },
+];
 
 
 export const COLORS = {

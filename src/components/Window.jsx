@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
 import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
 import Finder from "../windows/Finder.jsx";
+import { sidebar } from "../constants/index.js";
 
 export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
@@ -240,8 +241,16 @@ function WindowContent({ id }) {
   return <Content />;
 }
 
+const goToLocation = (id) => {
+  const location = sidebar.find((location) => location.id === id);
+
+  if (location) {
+    setActiveLocation(location);
+  }
+};
+
 const CONTENT_MAP = {
-  1: () => <div>Projects</div>,
+  1: () => goToLocation("work"),
   3: () => <div className="p-4">Contact form goes here.</div>,
-  5: Finder
+  5: Finder,
 };

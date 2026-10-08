@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { isWindowOpen } from "../types/types.js";
-import { COLORS, WINDOW_CONFIG } from "../constants/index.js";
+import { RESIZE_DIRECTIONS, WINDOW_CONFIG } from "../constants/index.js";
 import Finder from "../windows/Finder.jsx";
+
 
 export function Window({ config, state, actions, cascadeIndex = 0 }) {
   const isOpen = isWindowOpen(state);
@@ -32,6 +33,9 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
     height: WINDOW_CONFIG.WINDOW_HEIGHT,
   });
 
+  /**
+   * Dragging
+   */
   const dragRef = useRef({
     dragging: false,
     startX: 0,
@@ -72,6 +76,9 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
     };
   }, []);
 
+  /**
+   * Resizing
+   */
   const resizeRef = useRef({
     resizing: false,
     direction: null,
@@ -151,79 +158,35 @@ export function Window({ config, state, actions, cascadeIndex = 0 }) {
 
   return (
     <div
-      className="fixed rounded-xl overflow-hidden shadow-2xl flex flex-col"
+      id="window"
       style={{
         left: position.x,
         top: position.y,
         width: size.width,
         height: size.height,
         zIndex,
-        backgroundColor: COLORS.windowBg,
-        border: `1px solid ${COLORS.border}`,
       }}
       onMouseDownCapture={actions.focus}
     >
       <div
-        className="flex items-center gap-2 px-3 h-10 shrink-0 cursor-move select-none"
-        style={{
-          backgroundColor: isActive
-            ? COLORS.titleBarBg
-            : COLORS.titleBarBgInactive,
-          borderBottom: `1px solid ${COLORS.border}`,
-        }}
+        className={`window-titlebar ${isActive ? "active" : ""}`}
         onMouseDown={handleTitleMouseDown}
       >
-        <button
-          onClick={actions.close}
-          className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"
-          aria-label="Close"
-        />
-        <span
-          className="ml-2 text-sm font-medium truncate"
-          style={{ color: COLORS.textPrimary }}
-        >
-          {config.name}
-        </span>
+        <button onClick={actions.close} id="window-close" aria-label="Close" />
+        <span className="window-title">{config.name}</span>
       </div>
-      <div
-        className="flex-1 overflow-auto"
-        style={{ color: COLORS.textPrimary }}
-      >
+      <div className="flex-1 overflow-auto">
         <WindowContent id={config.id} data={state.data} />;
       </div>
 
-      <div
-        className="absolute top-0 left-0 w-3 h-3 cursor-nwse-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "top-left")}
-      />
-      <div
-        className="absolute top-0 right-0 w-3 h-3 cursor-nesw-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "top-right")}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-3 h-3 cursor-nesw-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "bottom-left")}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-3 h-3 cursor-nwse-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "bottom-right")}
-      />
-      <div
-        className="absolute top-0 left-3 right-3 h-1 cursor-ns-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "top")}
-      />
-      <div
-        className="absolute bottom-0 left-3 right-3 h-1 cursor-ns-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "bottom")}
-      />
-      <div
-        className="absolute left-0 top-3 bottom-3 w-1 cursor-ew-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "left")}
-      />
-      <div
-        className="absolute right-0 top-3 bottom-3 w-1 cursor-ew-resize"
-        onMouseDown={(e) => handleResizeMouseDown(e, "right")}
-      />
+      {RESIZE_DIRECTIONS.map((dir) => (
+        <div
+          key={dir}
+          className={`resize-handle resize-${dir}`}
+          onMouseDown={(e) => handleResizeMouseDown(e, dir)}
+        />
+      ))}
+
     </div>
   );
 }
@@ -232,7 +195,7 @@ function WindowContent({ id, data }) {
   const Content = CONTENT_MAP[id];
   if (!Content) {
     return (
-      <div className="p-4 text-sm" style={{ color: COLORS.textSecondary }}>
+      <div className="p-4 text-sm">
         No content registered for window id {id}.
       </div>
     );

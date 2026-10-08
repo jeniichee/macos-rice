@@ -46,21 +46,22 @@ export const sidebar = [
   { id: "trash", name: "Trash", type: "folder", items: trsh },
 ];
 
-
-export const COLORS = {
-  windowBg: "rgba(30, 30, 32, 0.97)",
-  border: "rgba(255, 255, 255, 0.08)",
-  titleBarBg: "rgba(40, 40, 44, 0.97)",
-  titleBarBgInactive: "rgba(28, 28, 30, 0.97)",
-  textPrimary: "rgba(255, 255, 255, 0.92)",
-  textSecondary: "rgba(255, 255, 255, 0.55)",
-  hoverBg: "rgba(255, 255, 255, 0.08)",
-};
-
+// try 1000
 export const WINDOW_CONFIG = {
   WINDOW_WIDTH: 480,
   WINDOW_HEIGHT: 360,
   MIN_WIDTH: 280,
   MIN_HEIGHT: 200,
-  CASCADE_OFFSET: -30,
+  CASCADE_OFFSET: -30, 
 };
+
+export const RESIZE_DIRECTIONS = [
+  "top-left",
+  "top-right",
+  "bottom-left",
+  "bottom-right",
+  "top",
+  "bottom",
+  "left",
+  "right",
+];

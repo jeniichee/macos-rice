@@ -19,9 +19,10 @@ export const navIcons = [
 // todo
 export const dockApps = [
   { id: 5, name: "Finder", img: "/icons/finder.png", open: true},
-  { id: 6, name: "Terminal", img: "/icons/terminal.png", open: false},
+  { id: 6, name: "Terminal", img: "/icons/terminal.png", open: false },
+  { id: 7, name: "Contact", img: "/icons/contact.png", open: false},
   // { id: 2, name:"VS Code", img:},
-  { id: 8, name: "Trash", img: "/icons/trash.png", open: true},
+  { id: 5, name: "Trash", img: "/icons/trash.png", open: true},
 ];
 
 
@@ -29,24 +30,29 @@ export const abt = [
   {
     id: 201,
     name: "Resume",
-    icon: "/icons/file.png",
+    icon: "/icons/pdf.png",
   },
 ];
 
 export const trsh = [];
 
 export const projectItems = [
-  { id: 101, name: "Project One", icon: "/icons/folder.png" },
-  { id: 102, name: "Project Two", icon: "/icons/folder.png" },
+  { id: 101, name: "Project One", icon: "/icons/txt.png" },
+  { id: 102, name: "Project Two", icon: "/icons/txt.png" },
 ];
 
 export const sidebar = [
-  { id: "projects", name: "Projects", type: "folder", items: projectItems },
-  { id: "about", name: "About", type: "folder", items: abt },
-  { id: "trash", name: "Trash", type: "folder", items: trsh },
+  {
+    id: "projects",
+    icon: "/icons/projects.svg",
+    name: "Projects",
+    type: "folder",
+    items: projectItems,
+  },
+  { id: "about", icon: "", name: "About", type: "folder", items: abt },
+  { id: "trash", icon: "", name: "Trash", type: "folder", items: trsh },
 ];
 
-// try 1000
 export const WINDOW_CONFIG = {
   WINDOW_WIDTH: 480,
   WINDOW_HEIGHT: 360,

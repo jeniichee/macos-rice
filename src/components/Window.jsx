@@ -200,7 +200,7 @@ function WindowContent({ id, data }) {
       </div>
     );
   }
-  return <Content {...data} />;
+  return <Content {...data} />
 }
 
 const CONTENT_MAP = {

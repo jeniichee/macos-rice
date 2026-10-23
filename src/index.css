@@ -88,7 +88,7 @@ body {
   }
 
   .window-title {
-    @apply ml-2 text-sm font-medium truncate text-white;
+    @apply ml-2 text-sm font-medium truncate text-gray-400 ;
   }
 
   #window-close {
@@ -157,10 +157,10 @@ body {
     @apply flex overflow-hidden rounded-xl h-full pl-3 pb-3 ;
 
     .sidebar {
-      @apply bg-[#27282A] w-37.5 flex flex-col p-2 space-y-3 rounded-[10px] border border-[#4C4E51];
+      @apply bg-[#27282A] gap-0.5 w-37.5 flex flex-col p-2 rounded-[10px] border border-[#4C4E51];
 
       button {
-        @apply w-full px-2 text-left text-[12px] font-normal leading-none rounded-[5px] transition-colors hover:bg-[#353537];
+        @apply w-full px-2 h-7 text-left text-[13px] font-normal leading-none rounded-[5px] transition-colors hover:bg-[#353537];
 
         &.active {
           @apply bg-[#353537] text-[#9B9B9D];
@@ -173,17 +173,21 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 bg-white max-w-2xl relative;
+      @apply flex-1 p-4 relative;
+
+      ul {
+        @apply flex flex-row flex-wrap items-start justify-start gap-2;
+      }
 
       li {
-        @apply absolute flex items-center flex-col gap-3;
+        @apply flex flex-col items-center gap-3 p-2 rounded hover:bg-[#353537];
 
-        img {
-          @apply object-contain object-center size-16 relative group-hover:scale-105;
+        .content_icon {
+          @apply relative object-contain object-center size-16;
         }
 
         p {
-          @apply text-sm text-center font-medium w-40;
+          @apply text-sm text-center font-medium w-24;
         }
       }
     }
